@@ -1,0 +1,46 @@
+
+
+# def fac(x, l):
+
+#     for i in l:
+#         if i == x:
+#             return True
+#     else: 
+#         return False
+
+# fac(3,[1,2,3] )
+
+
+        
+from operator import truediv
+from re import X
+
+
+# def fac(e,l):
+    
+#     if len(l) == 0:
+#         return False
+
+#     else:
+#         x = l.pop()
+
+#         if e == x:
+#             return True
+#     return fac(e,l)
+
+# fac(4, [1,2,3])
+
+
+def fac(e,l):
+
+    x = len(l)
+    
+    w = l[x-1]
+
+    if x == 0:
+        return False
+
+    else: 
+        
+
+    
