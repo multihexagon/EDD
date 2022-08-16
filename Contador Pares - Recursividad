@@ -1,0 +1,18 @@
+l = [1,2,3,4,5,6]
+par:int
+def f(l,par):
+    if len(l) == 0:
+        return 0 + par
+    else:
+        if l[-1]%2 ==  0:
+            par +=1
+            l.pop()
+            return f(l,par)
+        else: 
+            l.pop()
+            return f(l,par)
+
+print(f(l,0))
+
+
+    
