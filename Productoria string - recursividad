@@ -1,0 +1,15 @@
+def f(cadena):
+  if(len(cadena)==1):
+    if(cadena[0].isdigit()):
+      return int(cadena[0])
+    else:
+      return 0
+  elif(len(cadena)==0):
+    return 0
+  else:
+    if(cadena[-1].isdigit()):
+      return int(cadena[-1])*f(cadena[:-1])
+    else:
+      return f(cadena[:-1])
+s = " 5"
+f(s) 
