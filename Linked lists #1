@@ -1,0 +1,31 @@
+
+class Node:
+    def __init__(self,value,next = None):
+
+        self.value = value
+        self.next = next
+
+class Lista:
+
+    def __init__(self, head=None):
+
+        self.head = head
+
+    def add_head(self,n):
+        if self.head is None:
+            self.head = n
+        else: 
+            old = self.head
+            self.head = n
+            n.next = old
+    def traverse():
+        pass 
+        
+
+
+e1 = Node(1)
+e2 = Node(2)
+linkedlist = Lista()
+linkedlist.head = e1
+linkedlist.add_head(e2)
+
