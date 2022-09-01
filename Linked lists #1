@@ -1,46 +1,144 @@
-
 class Node:
-    def __init__(self,value,next = None):
-
-        self.value = value
-        self.next = next
-
-class Lista:
-
-    def __init__(self,size, head=None):
-
-        self.head = head
-        self.size = size
-
-    def add_head(self,n):
-        if self.head is None:
-            self.head = n
-            self.size += 1
-        else: 
-            old = self.head
-            self.head = n
-            n.next = old
-            self.size = self.size + 1
-    def traverse():
-        pass 
-        
-    def insert_at(self, index, value):
-        if index >= self.size:
-            return "Fuera de rango bro..."
-        else: 
-            pass 
+  def __init__(self, value):
+    self.value = value
+    self.next = None
 
 
+class LinkedList:
+  def __init__(self):
+    self.head = None
+  def add_at_head(self, value):
+    node = Node(value)
+    if(self.head is None):
+      self.head = node
+    else:
+      node.next = self.head
+      self.head = node #definí mi nueva cabeza
+
+  def traverse(self):
+    current_node = self.head
+    while(current_node is not None):
+      print(current_node.value)
+      current_node = current_node.next
+
+  def rec_traverse(self, current_node):
+    if(current_node is not None):
+      print(current_node.value)
+      self.rec_traverse(current_node.next)
+
+  def get_size(self):
+    current_node = self.head
+    size = 0
+    while(current_node is not None):
+        current_node = current_node.next
+        size += 1
+    return size
+
+  def delete_at_pos(self, pos):
+    current_node = self.head
+    if(self.get_size()==0):
+      return "Lista vacía..."
+    if(pos==0):
+      next_dir = self.head
+      self.head = self.head.next
+      next_dir.next = None
+    if(0 < pos < self.get_size()):
+      for i in range(0, pos-1):
+        current_node = current_node.next
+      next_dir = current_node.next
+      current_node.next = current_node.next.next
+      next_dir.next = None
+
+class LinkedListCircular:
+  def __init__(self):
+    self.head = None
+
+  def add_at_head(self, value):
+    node = Node(value)
+    if(self.head is None):
+      self.head = node
+      self.head.next = self.head
+    else:
+      node.next = self.head
+      siguiente = node.next
+      self.head = node
+      siguiente.next= self.head
 
 
-e1 = Node(1)
-e2 = Node(2)
-e3 = Node(50)
-e4 = Node(50)
-linkedlist = Lista(0)
-linkedlist.add_head(e1)
-linkedlist.add_head(e2)
-linkedlist.add_head(e3)
-linkedlist.add_head(e4)
-print(linkedlist.size)
+  def traverse(self):
+    inicio = self.head
+    current_node = inicio
+    while(current_node.next is not inicio):
+      print(current_node.value)
+      current_node = current_node.next
 
+  def rec_traverse(self, current_node):
+    if(current_node is not None):
+      print(current_node.value)
+      self.rec_traverse(current_node.next)
+
+  def get_size(self):
+    current_node = self.head
+    size = 0
+    while(current_node is not None):
+        current_node = current_node.next
+        size += 1
+    return size
+
+  def delete_at_pos(self, pos):
+    current_node = self.head
+    if(self.get_size()==0):
+      return "Lista vacía..."
+    if(pos==0):
+      next_dir = self.head
+      self.head = self.head.next
+      next_dir.next = None
+    if(0 < pos < self.get_size()):
+      for i in range(0, pos-1):
+        current_node = current_node.next
+      next_dir = current_node.next
+      current_node.next = current_node.next.next
+      next_dir.next = None
+
+
+# ll = LinkedList()
+# ll.add_at_head("hola")
+# ll.add_at_head("mundo")
+# ll.add_at_head(1)
+# ll.add_at_head(2)
+# ll.add_at_head(3)
+# ll.get_size()
+
+n1 = Node(5)
+n2 = Node(6)
+n3 = Node(7)
+n4 = Node(8)
+n1.next = n2
+n2.next = n3
+n3.next = n4
+n4.next = None
+
+def is_circular(head):
+    inicio = head
+    current_node = inicio
+    while( current_node.next is not inicio):
+        current_node.next = current_node.next.next
+        if current_node.next == None:
+            return False
+    return True
+
+is_circular(n1)
+
+circular = LinkedListCircular()
+
+circular.add_at_head(5)
+circular.add_at_head(6)
+circular.add_at_head(7)
+circular.add_at_head(8)
+circular.add_at_head(9)
+circular.add_at_head(10)
+circular.add_at_head(11)
+
+circular.traverse()
+
+#print(circular.head.next.next.value)
