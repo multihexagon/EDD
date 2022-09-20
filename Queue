@@ -1,0 +1,46 @@
+#implementación usando listas de python
+class Queue:
+  def __init__(self):
+    self.N = 5
+    self.n = 0
+    self.queue = [None]*self.N
+    self.pos_dis = 0
+    self.f = None
+
+  def enqueue(self, e):
+    if(self.n == self.N):
+      return "Grave..."
+    if(self.n == 0):
+      self.f = 0
+    self.queue[self.pos_dis] = e
+    self.n += 1 #cantidad de elementos
+    self.pos_dis = (self.f+self.n)%self.N #nueva posición disp
+    print(self.queue)
+
+  def dequeue(self):
+    #remueve y retorna el primer elemento
+    if(self.is_empty()):
+      raise Exception("Cola vacía...")
+    return self.queue.pop(0)
+
+  def first(self):
+    #retornar el primer elemento de la cola
+    if(self.is_empty()):
+      raise Exception("Cola vacía...")
+    return self.queue[0]
+
+  def is_empty(self):
+    return len(self.queue)==0
+
+  def __len__(self): #dunder method
+    #retorna tamaño
+    return len(self.queue)
+
+q = Queue()
+q.enqueue(5)
+q.enqueue(6)
+q.enqueue(7)
+q.enqueue(8)
+q.enqueue(9)
+q.enqueue(10)
+q.enqueue(11)
