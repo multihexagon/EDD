@@ -2,6 +2,7 @@ class Graph:
   def __init__(self):
     self.graph = {}
     self.size = 0
+    
   
   def add_vertex(self,label):
     if label in self.graph.keys():
@@ -25,10 +26,20 @@ class Graph:
     self.graph[v1].append(v2)
     print(self.graph)
 
+  def dfs(self,g,s,visited = []):
+    if s not in visited:
+        visited.append(s)
+        for i in self.graph[s]:
+            return self.dfs(g,i)
+        return visited
+
+    
+        
 g = Graph()
+
 
 g.add_edge("a","b")
 g.add_edge("b","c")
 g.add_edge("c","d")
-g.add_edge("d","e")
-g.path("a","d")
+g.add_edge("d","c")
+g.dfs(g,"a")
