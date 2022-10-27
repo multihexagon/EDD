@@ -1,0 +1,111 @@
+class BST:
+  def __init__(self, root):
+    self.root = Node(root)
+
+  def insertar(self, valor, current):
+    if current == None:
+      current = Node(valor)
+    elif current.value == valor:
+      return "el nodo ya existe"
+    else:
+      if valor < current.value:
+        if current.left_child == None:
+          current.left_child = Node(valor)
+        else:
+          return self.insertar(valor,current.left_child)
+      else:
+          if current.right_child == None:
+            current.right_child = Node(valor)
+          else:
+            return self.insertar(valor,current.right_child)
+
+  def buscar(self,valor,current):
+    if valor == current.value:
+      return True, current
+    if current.left_child.value == valor or current.right_child.value == valor:
+      return True, current
+    else:
+      return self.buscar(valor,current.left_child) or self.buscar(valor,current.right_child)
+    
+
+
+  def pretty_print_tree(self, node, prefix="", is_left=True):
+    if not node:
+      print("Empty Tree")
+      return
+    if node.right_child:
+      self.pretty_print_tree(node.right_child, prefix + ("│   " if is_left else "    "), False)
+    print(prefix + ("└── " if is_left else "┌── ") + str(node.value))
+    if node.left_child:
+      self.pretty_print_tree(node.left_child, prefix + ("    " if is_left else "│   "), True)
+
+
+  def altura(self,root,altura):
+    if root == None:
+      return 0
+    if root.left_child == None and root.right_child == None:
+      return altura
+    if root.left_child != None or root.right_child != None:
+      altura += 1
+      return max(self.altura(root.left_child,altura),  self.altura(root.right_child, altura))
+
+
+  def factorb(self,nodo):
+    x,y = self.buscar(nodo.value,self.root)
+    if x == True:
+      print(y.value)
+      return self.altura(y.left_child,0) - self.altura(y.right_child,0)
+
+  def is_balanced(self,root):
+    ranguito = [-1,0,1]
+    if self.factorb(root) not in ranguito:
+      return False
+    else:
+      return True
+  
+  def all_unbalanced(self,root,notbalanced):
+    if root == None:
+      return notbalanced
+    if root.left_child == None and root.right_child == None:
+      return notbalanced
+    if self.is_balanced(root) == False:
+      print(root.value)
+      notbalanced.append(root.value)
+      return self.all_unbalanced(root.left_child,notbalanced) or self.all_unbalanced(root.right_child,notbalanced)
+
+
+
+
+class Node:
+  def __init__(self, value):
+    self.value = value
+    self.left_child = None
+    self.right_child = None
+
+
+arbolito = BST(10)
+
+
+
+arbolito.insertar(5,arbolito.root)
+arbolito.insertar(15,arbolito.root)
+arbolito.insertar(14,arbolito.root)
+arbolito.insertar(3,arbolito.root)
+arbolito.insertar(16,arbolito.root)
+arbolito.insertar(16.5,arbolito.root)
+arbolito.insertar(16.56,arbolito.root)
+arbolito.insertar(16.6,arbolito.root)
+arbolito.insertar(6,arbolito.root)
+arbolito.insertar(17,arbolito.root)
+
+
+
+arbolito.pretty_print_tree(arbolito.root)
+arbolito.altura(arbolito.root,0)
+print(arbolito.is_balanced(Node(5)))
+print(arbolito.factorb(Node(5)))
+print(arbolito.altura(Node(3),0))
+print(arbolito.altura(Node(6),0))
+print(arbolito.altura(Node(5),0))
+print("---------------------------------")
+arbolito.all_unbalanced(arbolito.root,[])
